@@ -63,7 +63,7 @@ class Director:
             self (Director): An instance of Director.
         """
         self._handle_body_collision()
-        self._handle_food_collision()
+        self._verify_word()
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -93,7 +93,7 @@ class Director:
                 self._keep_playing = False
                 break
 
-    def _handle_food_collision(self):
+    def _verify_word(self):
         """Handles collisions between the snake's head and the food. Grows the 
         snake, updates the score and moves the food if there is one.
 
@@ -106,4 +106,4 @@ class Director:
             for n in range(points):
                 self._snake.grow_tail()
             self._score.add_points(points)
-            self._food.reset() 
+            self._food.reset()

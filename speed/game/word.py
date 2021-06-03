@@ -7,7 +7,7 @@ class Food(Actor):
 
     def __init__(self):
         self._points = 0
-        self.set_text('Word')
+        self.set_text(['@', '#', '$'])
         self.reset()
 
     def get_points(self):
@@ -15,7 +15,7 @@ class Food(Actor):
 
     def reset(self):
         self._points = random.randint(1, 5)
-        x = random.randint(1, constants.MAX_X - 2)
+        x = random.randint(1, constants.MAX_X - 15)
         y = random.randint(1, constants.MAX_Y - 2)
         position = Point(x, y)
         self.set_position(position)
