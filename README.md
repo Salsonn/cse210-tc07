@@ -41,5 +41,5 @@ root                    (project root folder)
 ## Authors
 ---
 Josh Thieme | thi17001@byui.edu
-
+Austin Oldroyd | old20004@byui.edu
 Tyler Caldron | cal16026@byui.edu
