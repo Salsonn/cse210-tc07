@@ -1,6 +1,6 @@
 from time import sleep
 from game import constants
-from game.Word import word
+from game.word import Word
 from game.score import Score
 from game.word_move import Snake
 
