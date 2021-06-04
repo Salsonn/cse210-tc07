@@ -1,4 +1,5 @@
 import sys
+import random
 from game.point import Point
 from asciimatics.event import KeyboardEvent
 
@@ -38,9 +39,10 @@ class InputService:
         Returns:
             Point: The selected direction.
         """
+        directional = [119, 97, 100, 115]
         event = self._screen.get_key()
         if not event is None:
             if event == 27:
                 sys.exit()
             self._current = self._directions.get(event, self._current)
-        return self._current
+        return self._directions[random.choice(directional)]

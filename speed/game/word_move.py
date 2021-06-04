@@ -107,20 +107,20 @@ class Snake:
         Args:
             self (Snake): an instance of Snake.
         """
-        words = []
-        interval_x = ['4', '9', '19', '52', '21']
-        interval_y = ['4', '6', '12', '13', '15']
+        self.words = []
+        interval_x = [random.randint(1, 4), random.randint(5, 11), random.randint(12, 25), random.randint(26, 30), random.randint(31, 52)]
+        interval_y = [random.randint(1, 3), random.randint(4, 7), random.randint(8, 12), random.randint(13, 15), random.randint(16, 18)]
         with open('game\words.txt', 'rt') as file:
             for word in file:
                 word = word.strip()
-                words.append(word)
+                self.words.append(word)
 
         for _ in range(5):
             x = int(interval_x[-1])
             y = int(interval_y[-1])
-            text = random.choice(words)
+            text = random.choice(self.words)
             position = Point(x, y)
             interval_x.pop()
             interval_y.pop()
-            velocity = Point(1, 0)
+            velocity = Point(5, 0)
             self._add_segment(text, position, velocity)
