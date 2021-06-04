@@ -20,6 +20,7 @@ class OutputService:
             screen (Screen): An Asciimatics Screen.
         """
         self._screen = screen
+        self.typed_word = []
         
     def clear_screen(self):
         """Clears the Asciimatics buffer in preparation for the next rendering.
@@ -28,8 +29,13 @@ class OutputService:
             self (OutputService): An instance of OutputService.
         """ 
         self._screen.clear_buffer(7, 0, 0)
-        self._screen.print_at("-" * constants.MAX_X, 0, 0, 7)
-        self._screen.print_at("-" * constants.MAX_X, 0, constants.MAX_Y, 7)
+        self._screen.print_at("-" * constants.MAX_X, 0, 0, 4)
+        self._screen.print_at("-" * constants.MAX_X, 0, constants.MAX_Y, 4)
+
+        self._screen.clear_buffer(7, 0, 0)
+        self._screen.print_at("-" * constants.MAX_X, 0, 0, 4)
+        self._screen.print_at("-" * constants.MAX_X, 0, 19, 4)
+        
         
     def draw_actor(self, actor):
         """Renders the given actor's text on the screen.
@@ -37,12 +43,19 @@ class OutputService:
         Args:
             self (OutputService): An instance of OutputService.
             actor (Actor): The actor to render.
-        """ 
+        """
+        try:
+            letter_index = self.typed_word.index(-1)
+        except:pass
+        
         text = actor.get_text()
         position = actor.get_position()
         x = position.get_x()
         y = position.get_y()
         self._screen.print_at(text, x, y, 7) # WHITE
+        try:
+            self._screen.print_at(self.typed_word[-1], letter_index + 2, 18, 7)
+        except:pass
 
     def draw_actors(self, actors):
         """Renders the given list of actors on the screen.
@@ -54,6 +67,9 @@ class OutputService:
         for actor in actors:
             self.draw_actor(actor)
     
+    def add_letter(self):
+        self._screen.print_at('E', 0, 0, 7)
+
     def flush_buffer(self):
         """Renders the screen.
 

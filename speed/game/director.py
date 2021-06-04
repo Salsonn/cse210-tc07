@@ -62,7 +62,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._handle_body_collision()
+        self._letter_typed()
         self._verify_word()
         
     def _do_outputs(self):
@@ -79,19 +79,8 @@ class Director:
         self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()
 
-    def _handle_body_collision(self):
-        """Handles collisions between the snake's head and body. Stops the game 
-        if there is one.
-
-        Args:
-            self (Director): An instance of Director.
-        """
-        head = self._snake.get_head()
-        body = self._snake.get_body()
-        for segment in body:
-            if head.get_position().equals(segment.get_position()):
-                self._keep_playing = False
-                break
+    def _letter_typed(self):
+        self._output_service.add_letter()
 
     def _verify_word(self):
         """Handles collisions between the snake's head and the food. Grows the 
