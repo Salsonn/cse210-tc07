@@ -65,6 +65,7 @@ class Director:
             self (Director): An instance of Director.
         """
         self._letter_typed()
+        self._buffer.add_input(".")
         self._verify_word()
         
     def _do_outputs(self):
