@@ -33,3 +33,13 @@ class Buffer(Actor):
         """
         self._buffer += input
         self.set_text(f"Buffer: {self._buffer}")
+
+    def clear_input(self, input):
+        """Adds the given points to the running total and updates the text.
+        
+        Args:
+            self (Score): An instance of Score.
+            points (integer): The points to add.
+        """
+        self._buffer = ""
+        self.set_text(f"Buffer: ")

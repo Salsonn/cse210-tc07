@@ -69,6 +69,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+
         self._verify_word()
         
     def _do_outputs(self):
