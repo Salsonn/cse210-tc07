@@ -2,6 +2,7 @@ from time import sleep
 from game import constants
 from game.word import Food
 from game.score import Score
+from game.buffer import Buffer
 from game.word_move import Snake
 
 class Director:
@@ -31,6 +32,7 @@ class Director:
         self._keep_playing = True
         self._output_service = output_service
         self._score = Score()
+        self._buffer = Buffer()
         self._snake = Snake()
         
     def start_game(self):
@@ -77,6 +79,7 @@ class Director:
         self._output_service.draw_actor(self._food)
         self._output_service.draw_actors(self._snake.get_all())
         self._output_service.draw_actor(self._score)
+        self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
 
     def _letter_typed(self):
