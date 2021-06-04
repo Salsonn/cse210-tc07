@@ -60,7 +60,7 @@ class Director:
             self._buffer.add_input(chr(event))
 
         if event == 13:
-            pass
+            self._buffer.clear_input()
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
