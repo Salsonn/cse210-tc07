@@ -7,7 +7,7 @@ class Food(Actor):
 
     def __init__(self):
         self._points = 0
-        self.set_text(['@', '#', '$'])
+        self.set_text('@')
         self.reset()
 
     def get_points(self):

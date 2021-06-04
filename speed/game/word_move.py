@@ -1,3 +1,4 @@
+import random
 from game import constants
 from game.actor import Actor
 from game.point import Point
@@ -62,7 +63,7 @@ class Snake:
         """
         tail = self._segments[-1]
         offset = tail.get_velocity().reverse()
-        text = "#"
+        text = ""
         position = tail.get_position().add(offset)
         velocity = tail.get_velocity()
         self._add_segment(text, position, velocity)
@@ -106,10 +107,20 @@ class Snake:
         Args:
             self (Snake): an instance of Snake.
         """
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
-        for n in range(constants.SNAKE_LENGTH):
-            text = "8" if n == 0 else "#"
-            position = Point(x - n, y)
+        words = []
+        interval_x = ['4', '9', '19', '52', '21']
+        interval_y = ['4', '6', '12', '13', '15']
+        with open('game\words.txt', 'rt') as file:
+            for word in file:
+                word = word.strip()
+                words.append(word)
+
+        for _ in range(5):
+            x = int(interval_x[-1])
+            y = int(interval_y[-1])
+            text = random.choice(words)
+            position = Point(x, y)
+            interval_x.pop()
+            interval_y.pop()
             velocity = Point(1, 0)
             self._add_segment(text, position, velocity)
