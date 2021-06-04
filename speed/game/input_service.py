@@ -1,6 +1,8 @@
+from game import output_service
 import sys
 import random
 from game.point import Point
+from game.buffer import Buffer
 from asciimatics.event import KeyboardEvent
 
 class InputService:
@@ -15,13 +17,15 @@ class InputService:
         _current (Point): The last direction that was pressed.
     """
 
-    def __init__(self, screen):
+    def __init__(self, screen, output_service):
         """The class constructor.
         
         Args:
             self (InputService): An instance of InputService.
         """
         self._screen = screen
+        self._buffer = Buffer()
+        self._output_service = output_service
         self._directions = {}
         self._directions[119] = Point(0, -1) # UP
         self._directions[97] = Point(-1, 0) # DOWN
@@ -45,4 +49,4 @@ class InputService:
             if event == 27:
                 sys.exit()
             self._current = self._directions.get(event, self._current)
-        return self._directions[random.choice(directional)]
+        return self._directions[random.choice(directional)], event

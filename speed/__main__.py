@@ -4,8 +4,8 @@ from game.output_service import OutputService
 from asciimatics.screen import Screen 
 
 def main(screen):
-    input_service = InputService(screen)
     output_service = OutputService(screen)
+    input_service = InputService(screen, output_service)
     director = Director(input_service, output_service)
     director.start_game()
 

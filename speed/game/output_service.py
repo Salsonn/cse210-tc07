@@ -44,19 +44,12 @@ class OutputService:
             self (OutputService): An instance of OutputService.
             actor (Actor): The actor to render.
         """
-        try:
-            letter_index = self.typed_word.index(-1)
-        except:pass
-        
         text = actor.get_text()
         position = actor.get_position()
         x = position.get_x()
         y = position.get_y()
         self._screen.print_at(text, x, y, 7) # WHITE
-        try:
-            self._screen.print_at(self.typed_word[-1], letter_index + 2, 18, 7)
-        except:pass
-
+        
     def draw_actors(self, actors):
         """Renders the given list of actors on the screen.
 
@@ -66,9 +59,6 @@ class OutputService:
         """ 
         for actor in actors:
             self.draw_actor(actor)
-    
-    def add_letter(self):
-        self._screen.print_at('E', 0, 0, 7)
 
     def flush_buffer(self):
         """Renders the screen.

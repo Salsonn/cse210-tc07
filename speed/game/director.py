@@ -34,7 +34,7 @@ class Director:
         self._score = Score()
         self._buffer = Buffer()
         self._snake = Snake()
-        
+
     def start_game(self):
         """Starts the game loop to control the sequence of play.
         
@@ -54,8 +54,13 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        direction = self._input_service.get_direction()
+        direction, event = self._input_service.get_direction()
         self._snake.move_head(direction)
+        if event:
+            self._buffer.add_input(chr(event))
+
+        if event == 13:
+            pass
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -64,7 +69,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._letter_typed()
         self._verify_word()
         
     def _do_outputs(self):
@@ -82,8 +86,6 @@ class Director:
         self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
 
-    def _letter_typed(self):
-        self._output_service.add_letter()
 
     def _verify_word(self):
         """Handles collisions between the snake's head and the food. Grows the 
