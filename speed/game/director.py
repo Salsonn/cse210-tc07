@@ -34,6 +34,7 @@ class Director:
         self._score = Score()
         self._buffer = Buffer()
         self._snake = Snake()
+        self.typed_word = []
 
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -56,11 +57,26 @@ class Director:
         """
         direction, event = self._input_service.get_direction()
         self._snake.move_head(direction)
-        if event:
-            self._buffer.add_input(chr(event))
 
         if event == 13:
             self._buffer.clear_input()
+            
+            ccat = ''
+            words = self._snake.return_words()
+            for i in self.typed_word:
+                ccat += i
+            if ccat in words:
+                index_value = words.index(ccat)
+                words.pop(index_value)
+                self._snake.remove_word()
+
+            self.typed_word = []
+
+        elif event == -300:pass
+
+        elif event:
+            self._buffer.add_input(chr(event))
+            self.typed_word.append(chr(event))
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 

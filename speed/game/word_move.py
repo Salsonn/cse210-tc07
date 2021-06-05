@@ -108,6 +108,7 @@ class Snake:
             self (Snake): an instance of Snake.
         """
         self.words = []
+        self.chosen_words = []
         interval_x = [random.randint(1, 4), random.randint(5, 11), random.randint(12, 25), random.randint(26, 30), random.randint(31, 52)]
         interval_y = [random.randint(1, 3), random.randint(4, 7), random.randint(8, 12), random.randint(13, 15), random.randint(16, 18)]
         with open('game\words.txt', 'rt') as file:
@@ -119,8 +120,25 @@ class Snake:
             x = int(interval_x[-1])
             y = int(interval_y[-1])
             text = random.choice(self.words)
+            self.chosen_words.append(text)
             position = Point(x, y)
             interval_x.pop()
             interval_y.pop()
-            velocity = Point(5, 0)
+            velocity = Point(1, 0)
             self._add_segment(text, position, velocity)
+
+    def remove_word(self):
+        interval_x = [random.randint(1, 4), random.randint(5, 11), random.randint(12, 25), random.randint(26, 30), random.randint(31, 52)]
+        interval_y = [random.randint(1, 3), random.randint(4, 7), random.randint(8, 12), random.randint(13, 15), random.randint(16, 18)]
+
+        for l in range(len(self.chosen_words)):
+            x = int(interval_x[-1])
+            y = int(interval_y[-1])
+            position = Point(x, y)
+            interval_x.pop()
+            interval_y.pop()
+            velocity = Point(1, 0)
+            self._add_segment(self.chosen_words[l], position, velocity)
+
+    def return_words(self):
+        return self.chosen_words
