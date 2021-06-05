@@ -69,6 +69,8 @@ class Director:
                 index_value = words.index(ccat)
                 words.pop(index_value)
                 self._snake.remove_word()
+                points = self._food.get_points(ccat)
+                self._score.add_points(points)
 
             self.typed_word = []
 

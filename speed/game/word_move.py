@@ -128,10 +128,14 @@ class Snake:
             self._add_segment(text, position, velocity)
 
     def remove_word(self):
+        self._segments = []
         interval_x = [random.randint(1, 4), random.randint(5, 11), random.randint(12, 25), random.randint(26, 30), random.randint(31, 52)]
         interval_y = [random.randint(1, 3), random.randint(4, 7), random.randint(8, 12), random.randint(13, 15), random.randint(16, 18)]
 
-        for l in range(len(self.chosen_words)):
+        for l in range(5):
+            if l == 0:
+                text = random.choice(self.words)
+                self.chosen_words.append(text)
             x = int(interval_x[-1])
             y = int(interval_y[-1])
             position = Point(x, y)

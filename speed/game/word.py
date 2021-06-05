@@ -10,11 +10,11 @@ class Food(Actor):
         self.set_text('3')
         self.reset()
 
-    def get_points(self):
+    def get_points(self, word):
+        self._points = len(word)
         return self._points
 
     def reset(self):
-        self._points = random.randint(1, 5)
         x = constants.MAX_X - constants.MAX_X - 4
         y = constants.MAX_Y - constants.MAX_Y - 3
         position = Point(x, y)
