@@ -3,20 +3,20 @@ from game import constants
 from game.actor import Actor
 from game.point import Point
 
-class Snake:
-    """A limbless reptile. The responsibility of Snake is keep track of its segments. It contains methods for moving and growing among others.
+class Word_move:
+    """A class that controls the random movement of each random word.
 
     Stereotype:
         Structurer, Information Holder
 
     Attributes:
-        _body (List): The snake's body (a list of Actor instances)
+        _body (List): The total amount of random words on the screen at a given time (a list of Actor instances)
     """
     def __init__(self):
         """The class constructor.
         
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): an instance of Word_move.
         """
         super().__init__()
         self._segments = []
@@ -26,40 +26,40 @@ class Snake:
         """Gets all the snake's segments.
         
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): an instance of Word_move.
 
         Returns:
-            list: The snake's segments.
+            list: The words from the list.
         """
         return self._segments
 
     def get_body(self):
-        """Gets the snake's body.
+        """Gets the random words
         
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): An instance of Word_move.
 
         Returns:
-            list: The snake's body.
+            list: The random words.
         """
         return self._segments[1:]
 
     def get_head(self):
-        """Gets the snake's head.
+        """Gets the first of many random words.
         
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): An instance of Word_move.
 
         Returns:
-            Actor: The snake's head.
+            Actor: The first random word.
         """
         return self._segments[0]
 
     def grow_tail(self):
-        """Grows the snake's tail by one segment.
+        """Grows the length of random words.
         
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): an instance of Word_move.
         """
         tail = self._segments[-1]
         offset = tail.get_velocity().reverse()
@@ -69,10 +69,10 @@ class Snake:
         self._add_segment(text, position, velocity)
     
     def move_head(self, direction):
-        """Moves the snake in the given direction.
+        """Moves the words in a random direction.
 
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): an instance of Word_move.
             direction (Point): The direction to move.
         """
         count = len(self._segments) - 1
@@ -90,7 +90,7 @@ class Snake:
         """Adds a new segment to the snake using the given text, position and velocity.
 
         Args:
-            self (Snake): An instance of snake.
+            self (Word_move): an instance of Word_move.
             text (string): The segment's text.
             position (Point): The segment's position.
             velocity (Point): The segment's velocity.
@@ -102,10 +102,10 @@ class Snake:
         self._segments.append(segment)
 
     def _prepare_body(self):
-        """Prepares the snake body by adding segments.
+        """Prepares the random words by retreiving the words from a separate file.
         
         Args:
-            self (Snake): an instance of Snake.
+            self (Word_move): an instance of Word_move.
         """
         self.words = []
         self.chosen_words = []
@@ -132,6 +132,7 @@ class Snake:
         interval_x = [random.randint(1, 4), random.randint(5, 11), random.randint(12, 25), random.randint(26, 30), random.randint(31, 52)]
         interval_y = [random.randint(1, 3), random.randint(4, 7), random.randint(8, 12), random.randint(13, 15), random.randint(16, 18)]
 
+        # l represents the length of random words on the screen.
         for l in range(5):
             if l == 0:
                 text = random.choice(self.words)

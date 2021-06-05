@@ -1,10 +1,10 @@
 from time import sleep
 import os
 from game import constants
-from game.word import Food
+from game.word import Word
 from game.score import Score
 from game.buffer import Buffer
-from game.word_move import Snake
+from game.word_move import Word_move
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -28,13 +28,13 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._food = Food()
+        self._word = Word()
         self._input_service = input_service
         self._keep_playing = True
         self._output_service = output_service
         self._score = Score()
         self._buffer = Buffer()
-        self._snake = Snake()
+        self._word_move = Word_move()
         self.typed_word = []
 
     def start_game(self):
@@ -57,20 +57,20 @@ class Director:
             self (Director): An instance of Director.
         """
         direction, event = self._input_service.get_direction()
-        self._snake.move_head(direction)
+        self._word_move.move_head(direction)
 
         if event == 13:
             self._buffer.clear_input()
             
             ccat = ''
-            words = self._snake.return_words()
+            words = self._word_move.return_words()
             for i in self.typed_word:
                 ccat += i
             if ccat in words:
                 index_value = words.index(ccat)
                 words.pop(index_value)
-                self._snake.remove_word()
-                points = self._food.get_points(ccat)
+                self._word_move.remove_word()
+                points = self._word.get_points(ccat)
                 self._score.add_points(points)
 
             self.typed_word = []
@@ -105,8 +105,8 @@ class Director:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        self._output_service.draw_actor(self._food)
-        self._output_service.draw_actors(self._snake.get_all())
+        self._output_service.draw_actor(self._word)
+        self._output_service.draw_actors(self._word_move.get_all())
         self._output_service.draw_actor(self._score)
         self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
@@ -119,10 +119,10 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        head = self._snake.get_head()
-        if head.get_position().equals(self._food.get_position()):
-            points = self._food.get_points()
+        head = self._word_move.get_head()
+        if head.get_position().equals(self._word.get_position()):
+            points = self._word.get_points()
             for n in range(points):
-                self._snake.grow_tail()
+                self._word_move.grow_tail()
             self._score.add_points(points)
-            self._food.reset()
+            self._word.reset()
