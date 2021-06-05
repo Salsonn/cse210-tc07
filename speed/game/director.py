@@ -1,4 +1,5 @@
 from time import sleep
+import os
 from game import constants
 from game.word import Food
 from game.score import Score
@@ -75,6 +76,11 @@ class Director:
             self.typed_word = []
 
         elif event == -300:pass
+        
+        elif event == -1:
+            self._keep_playing = False
+            os.system('cls')
+            print(f'Your final score was {self._score._points}')
 
         elif event:
             self._buffer.add_input(chr(event))
